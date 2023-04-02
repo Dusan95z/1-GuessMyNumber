@@ -2,7 +2,7 @@ const checkBtn = document.querySelector('.check');
 const againBtn = document.querySelector('.again');
 const message = document.querySelector('.message');
 const number = document.querySelector('.number');
-const guess = document.querySelector('.guess');
+const guessEl = document.querySelector('.guess');
 const scoreEl = document.querySelector('.score');
 const highscoreEl = document.querySelector('.highscore');
 const body = document.querySelector('body');
@@ -13,7 +13,7 @@ let highscore = 0;
 
 // check button functionality
 checkBtn.addEventListener('click', (e) => {
-  const guess = +document.querySelector('.guess').value;
+  const guess = +guessEl.value;
   // no input
   if (!guess) {
     displayMessage('No number!');
@@ -23,6 +23,7 @@ checkBtn.addEventListener('click', (e) => {
     number.textContent = secretNumber;
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
+    guessEl.disabled = true;
 
     if (score > highscore) {
       highscore = score;
@@ -37,6 +38,7 @@ checkBtn.addEventListener('click', (e) => {
     } else {
       displayMessage('You lost the game!');
       scoreEl.textContent = 0;
+      guessEl.disabled = true;
     }
   }
 });
@@ -48,9 +50,10 @@ againBtn.addEventListener('click', (e) => {
   displayMessage('Start guessing...');
   scoreEl.textContent = score;
   number.textContent = '?';
-  guess.value = '';
+  guessEl.value = '';
   body.style.backgroundColor = '#222';
   number.style.width = '15rem';
+  guessEl.disabled = false;
 });
 
 // message function
